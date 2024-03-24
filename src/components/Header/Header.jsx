@@ -1,29 +1,31 @@
-import {
-  HeaderContainer,
-  Navigation,
-  StyledLink,
-  IconWrapper,
-} from './Header.styled';
-import sprite from 'assets/sprite.svg';
+import { useLocation } from 'react-router-dom';
+import { HeaderContainer, NavigationList, StyledLink } from './Header.styled';
 
 export const Header = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const headerStyle = {
+    borderBottom: isHomePage ? '0' : '1px solid #E44848',
+    position: isHomePage ? 'absolute' : 'static',
+    backgroundColor: isHomePage ? 'transparent' : '#fff',
+    transform: isHomePage ? 'translateX(-50%)' : 'none',
+  };
 
   return (
-    <HeaderContainer>
-      <Navigation>
-        <StyledLink to="/first">
-          <IconWrapper>
-            <use href={`${sprite}#icon-logo`} />
-          </IconWrapper>
-          First
-        </StyledLink>
-        <StyledLink to="/second">
-          <IconWrapper>
-            <use href={`${sprite}#icon-logo`} />
-          </IconWrapper>
-          Second
-        </StyledLink>
-      </Navigation>
+    <HeaderContainer style={headerStyle}>
+      <nav>
+        <NavigationList>
+          <li>
+            <StyledLink to="/">Home</StyledLink>
+          </li>
+          <li>
+            <StyledLink to="/catalog">Catalog</StyledLink>
+          </li>
+          <li>
+            <StyledLink to="/favorites">Favorites</StyledLink>
+          </li>
+        </NavigationList>
+      </nav>
     </HeaderContainer>
   );
 };

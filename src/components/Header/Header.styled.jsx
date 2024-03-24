@@ -1,51 +1,53 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const HeaderContainer = styled.div`
-  padding: 20px;
+export const HeaderContainer = styled.header`
+  width: 100%;
+  padding-block: 20px;
+  top: 0;
+  left: 50%;
 `;
 
-export const Navigation = styled.nav`
+export const NavigationList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+  gap: 12px;
 
-export const StyledLink = styled(Link)`
-  padding: 8px 16px;
-  color: #ffffff; /* White text color */
-  text-shadow:
-    0 0 5px #00baff,
-    0 0 10px #00baff,
-    0 0 20px #00baff,
-    0 0 40px #00baff,
-    0 0 80px #00baff;
-  transition:
-    color 0.3s,
-    text-shadow 0.3s;
+  @media screen and (min-width: 768px) {
+    gap: 36px;
+  }
 
-  &:hover,
-  &:focus {
-    color: #00baff; /* Blue text color on hover/focus */
-    text-shadow:
-      0 0 5px #00baff,
-      0 0 10px #00baff,
-      0 0 20px #00baff,
-      0 0 40px #00baff,
-      0 0 80px #00baff;
+  @media screen and (min-width: 1440px) {
+    gap: 48px;
   }
 `;
 
-export const IconWrapper = styled.svg`
-  width: ${(props) => props.size || '12px'};
-  height: ${(props) => props.size || '12px'};
-  fill: ${(props) => props.color || '#ffffff'};
+export const StyledLink = styled(NavLink)`
   display: inline-block;
-  margin-right: 5px;
-  box-shadow:
-    0 0 5px #00baff,
-    0 0 10px #00baff,
-    0 0 20px #00baff,
-    0 0 40px #00baff,
-    0 0 80px #00baff;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.25;
+  padding: 8px 16px;
+  color: ${(p) => p.theme.colors.black};
+  border: 1px solid rgba(71, 84, 103, 0.2);
+  border-radius: 200px;
+
+  transition: border-color linear 0.3s;
+
+  &:hover,
+  &:focus,
+  &.active {
+    border-color: ${(p) => p.theme.colors.red};
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  @media screen and (min-width: 1440px) {
+    font-size: 20px;
+    line-height: 1.5;
+  }
 `;
